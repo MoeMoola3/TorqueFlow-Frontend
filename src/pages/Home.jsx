@@ -47,6 +47,8 @@ export default function Home() {
             WebkitTextFillColor: 'transparent',
             letterSpacing: '2px',
             fontFamily: "'Orbitron', sans-serif",
+            textAlign: 'center',
+            px: { xs: 2, sm: 4, md: 0 },
           }}
         >
           Torque Flow
