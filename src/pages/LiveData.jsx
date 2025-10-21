@@ -4,6 +4,7 @@ import GaugeComponent from 'react-gauge-component';
 import { motion } from 'framer-motion';
 import { useMediaQuery, useTheme } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { useState } from 'react';
 
 export default function LiveData({ data }) {
   if (!data) return <Typography>Loading...</Typography>;
@@ -18,6 +19,45 @@ export default function LiveData({ data }) {
     engineLoad,
     fuelLevel,
   } = data;
+
+  const [selectedButton, setSelectedButton] = useState(null);
+
+  const handleSelect = (key) => {
+    setSelectedButton(key);
+  };
+
+  const buttons = [
+    {
+      key: 'cold',
+      label: 'COLD START',
+      color: '#0288d1',
+    },
+    {
+      key: 'idle',
+      label: 'IDLE',
+      color: '#4caf50',
+    },
+    {
+      key: 'acc',
+      label: 'ACCELERATION',
+      color: '#f44336',
+    },
+    {
+      key: 'cruise',
+      label: 'CRUISE',
+      color: '#ff9800',
+    },
+    {
+      key: 'dec',
+      label: 'DECELERATION',
+      color: '#9c27b0',
+    },
+    {
+      key: 'heavy',
+      label: 'HEAVY LOAD',
+      color: '#795548',
+    },
+  ];
 
   const gauges = [
     { label: 'Engine RPM', value: engineRpm, min: 0, max: 8000, units: 'RPM' },
@@ -40,71 +80,76 @@ export default function LiveData({ data }) {
   return (
     <Box
       sx={{
-        px: 2,
-        pt: 2,
-        height: '100vh',
-        overflowY: 'auto',
+        position: 'relative',
+        minHeight: '100vh',
+        overflow: 'hidden',
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
         bgcolor: 'default.background',
+        px: 2,
+        pt: 2,
       }}
     >
       <Box
         sx={{
-          // height: '100vh',
-          flexDirection: 'column',
-          justifyContent: 'start',
-          // bgcolor: '#287',
-          pt: 4,
+          position: 'absolute',
+          top: 36,
+          left: 36,
+          zIndex: 1000,
         }}
       >
-        <Button
-          variant='outlined'
-          sx={{
-            'borderColor': '#84cc16',
-            'color': 'white',
-            'borderRadius': 1,
-            'px': 2,
-            'py': 1.2,
-            'textTransform': 'none',
-            'backgroundColor': 'transparent',
-            'transition': 'background-color 0.3s ease',
-            '&:hover, &:active': {
-              backgroundColor: '#abf044ff',
-            },
-          }}
-        >
-          <Stack direction='row' spacing={1.5} alignItems='center'>
-            <Box
-              sx={{
-                width: 24,
-                height: 24,
-                borderRadius: '50%',
-                border: '1px solid white',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-            >
-              <ArrowBackIcon sx={{ width: 14, height: 14, color: 'white' }} />
-            </Box>
-            <span
-              style={{
-                fontFamily: 'var(--caption-heavy-font-family)',
-                fontWeight: 'var(--caption-heavy-font-weight)',
-                fontSize: 'var(--caption-heavy-font-size)',
-                letterSpacing: 'var(--caption-heavy-letter-spacing)',
-                lineHeight: 'var(--caption-heavy-line-height)',
-                fontStyle: 'var(--caption-heavy-font-style)',
-                whiteSpace: 'nowrap',
-              }}
-            >
-              Menu
-            </span>
-          </Stack>
-        </Button>
+        <Link to='/' style={{ textDecoration: 'none' }}>
+          <Button
+            variant='outlined'
+            sx={{
+              'borderColor': '#84cc16',
+              'color': 'white',
+              'borderRadius': 1,
+              'px': 2,
+              'py': 1.2,
+              'textTransform': 'none',
+              'backgroundColor': 'transparent',
+              'transition': 'background-color 0.3s ease',
+              '&:hover, &:active': {
+                backgroundColor: '#abf044ff',
+              },
+            }}
+          >
+            <Stack direction='row' spacing={1.5} alignItems='center'>
+              <Box
+                sx={{
+                  width: 24,
+                  height: 24,
+                  borderRadius: '50%',
+                  border: '1px solid white',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                <ArrowBackIcon sx={{ width: 14, height: 14, color: 'white' }} />
+              </Box>
+
+              <Typography
+                sx={{
+                  display: { xs: 'none', sm: 'block' },
+                  fontFamily: 'var(--caption-heavy-font-family)',
+                  fontWeight: 'var(--caption-heavy-font-weight)',
+                  fontSize: 'var(--caption-heavy-font-size)',
+                  letterSpacing: 'var(--caption-heavy-letter-spacing)',
+                  lineHeight: 'var(--caption-heavy-line-height)',
+                  fontStyle: 'var(--caption-heavy-font-style)',
+                  whiteSpace: 'nowrap',
+                }}
+              >
+                Menu
+              </Typography>
+            </Stack>
+          </Button>
+        </Link>
       </Box>
+
       <Box
         sx={{
           px: 2,
@@ -153,6 +198,8 @@ export default function LiveData({ data }) {
             display: 'flex',
             flexDirection: { xs: 'column', md: 'row' },
             alignItems: 'center',
+            px: 3,
+            bgcolor: 'default.background',
           }}
         >
           <Box
@@ -227,161 +274,46 @@ export default function LiveData({ data }) {
             </Grid>
           </Box>
           <ButtonGroup
+            variant='contained'
+            disableElevation
             size='large'
             orientation={isSmallScreen ? 'horizontal' : 'vertical'}
             aria-label='Engine Modes'
-            variant='contained'
-            disableElevation
             sx={{
-              'boxShadow': 3,
-              'pt': 0,
-              '& .MuiButton-root': {
-                'color': '#fff',
-                'boxShadow': 3,
-                'border': 'none',
-                'transition': 'all 0.1s ease-in-out',
-                'fontSize': {
-                  xs: '0.7rem', // small screens
-                  sm: '0.85rem',
-                  md: '1rem', // medium and up
-                },
-                'padding': {
-                  xs: '4px 8px',
-                  sm: '6px 12px',
-                  md: '8px 16px',
-                },
-                '&:hover': {
-                  boxShadow: 6,
-                },
-                '&:focus': {
-                  outline: 'none',
-                  boxShadow: 'inset 0 3px 5px rgba(0, 0, 0, 0.4)',
-                  transform: 'translateY(2px)',
-                },
-                '&:focus-visible': {
-                  outline: 'none',
-                },
-                '&:active': {
-                  boxShadow: 'inset 0 3px 5px rgba(0, 0, 0, 0.4)',
-                  transform: 'translateY(2px)',
-                },
+              '& .MuiButtonGroup-grouped': {
+                borderColor: 'transparent',
               },
             }}
           >
-            {/* 🟦 COLD START — icy blue */}
-            <Button
-              sx={{
-                'backgroundColor': '#0d47a1',
-                'color': '#e3f2fd',
-                'border': '1px solid #2196f3',
-                'boxShadow': '0 0 10px rgba(33, 150, 243, 0.4)',
-                'transition': 'all 0.3s ease',
-                '&:hover': {
-                  backgroundColor: '#2196f3',
-                  color: '#fff',
-                  boxShadow: '0 0 20px rgba(33, 150, 243, 0.8)',
-                  transform: 'scale(1.05)',
-                },
-              }}
-            >
-              COLD START
-            </Button>
-
-            {/* 🟩 IDLE — calm green */}
-            <Button
-              sx={{
-                'backgroundColor': '#1b5e20',
-                'color': '#e8f5e9',
-                'border': '1px solid #4caf50',
-                'boxShadow': '0 0 10px rgba(76, 175, 80, 0.4)',
-                'transition': 'all 0.3s ease',
-                '&:hover': {
-                  backgroundColor: '#4caf50',
-                  color: '#fff',
-                  boxShadow: '0 0 20px rgba(76, 175, 80, 0.8)',
-                  transform: 'scale(1.05)',
-                },
-              }}
-            >
-              IDLE
-            </Button>
-
-            {/* 🟨 ACCELERATION — energetic yellow/orange */}
-            <Button
-              onClick={handleClick}
-              sx={{
-                'backgroundColor': '#f57f17',
-                'color': '#fffde7',
-                'border': '1px solid #ffb300',
-                'boxShadow': '0 0 10px rgba(255, 179, 0, 0.4)',
-                'transition': 'all 0.3s ease',
-                '&:hover': {
-                  backgroundColor: '#ffb300',
-                  color: '#000',
-                  boxShadow: '0 0 20px rgba(255, 179, 0, 0.8)',
-                  transform: 'scale(1.05)',
-                },
-              }}
-            >
-              ACCELERATION
-            </Button>
-
-            {/* 🟦 CRUISE — stable cool blue */}
-            <Button
-              sx={{
-                'backgroundColor': '#1565c0',
-                'color': '#e3f2fd',
-                'border': '1px solid #64b5f6',
-                'boxShadow': '0 0 10px rgba(100, 181, 246, 0.4)',
-                'transition': 'all 0.3s ease',
-                '&:hover': {
-                  backgroundColor: '#64b5f6',
-                  color: '#000',
-                  boxShadow: '0 0 20px rgba(100, 181, 246, 0.8)',
-                  transform: 'scale(1.05)',
-                },
-              }}
-            >
-              CRUISE
-            </Button>
-
-            {/* 🟧 DECELERATION — amber for slowing down */}
-            <Button
-              sx={{
-                'backgroundColor': '#e65100',
-                'color': '#fff3e0',
-                'border': '1px solid #ff9800',
-                'boxShadow': '0 0 10px rgba(255, 152, 0, 0.4)',
-                'transition': 'all 0.3s ease',
-                '&:hover': {
-                  backgroundColor: '#ff9800',
-                  color: '#000',
-                  boxShadow: '0 0 20px rgba(255, 152, 0, 0.8)',
-                  transform: 'scale(1.05)',
-                },
-              }}
-            >
-              DECELERATION
-            </Button>
-
-            {/* 🔴 HEAVY LOAD — red warning tone */}
-            <Button
-              sx={{
-                'backgroundColor': '#b71c1c',
-                'color': '#ffebee',
-                'border': '1px solid #f44336',
-                'boxShadow': '0 0 10px rgba(244, 67, 54, 0.4)',
-                'transition': 'all 0.3s ease',
-                '&:hover': {
-                  backgroundColor: '#f44336',
-                  color: '#fff',
-                  boxShadow: '0 0 20px rgba(244, 67, 54, 0.8)',
-                  transform: 'scale(1.05)',
-                },
-              }}
-            >
-              HEAVY LOAD
-            </Button>
+            {buttons.map((btn) => (
+              <Button
+                key={btn.key}
+                onClick={() => handleSelect(btn.key)}
+                sx={{
+                  'color': selectedButton === btn.key ? '#fff' : btn.color,
+                  'backgroundColor': selectedButton === btn.key ? btn.color : 'transparent',
+                  'transition': 'all 0.2s ease-in-out',
+                  '&:hover': {
+                    backgroundColor: selectedButton === btn.key ? btn.color : `${btn.color}22`,
+                    color: selectedButton === btn.key ? '#fff' : btn.color,
+                    transform: 'scale(1.03)',
+                  },
+                  '&:active': {
+                    transform: 'scale(0.97)',
+                  },
+                  '&:focus': {
+                    outline: 'none',
+                    boxShadow: 'none',
+                  },
+                  '&:focus-visible': {
+                    outline: 'none',
+                    boxShadow: 'none',
+                  },
+                }}
+              >
+                {btn.label}
+              </Button>
+            ))}
           </ButtonGroup>
         </Box>
       </Box>
