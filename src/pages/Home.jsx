@@ -22,7 +22,6 @@ export default function Home() {
         bgcolor: 'background.default',
       }}
     >
-      {/* Animated Title */}
       <motion.div
         animate={{
           backgroundPositionX: ['0%', '200%'],
@@ -47,12 +46,13 @@ export default function Home() {
             WebkitTextFillColor: 'transparent',
             letterSpacing: '2px',
             fontFamily: "'Orbitron', sans-serif",
+            textAlign: 'center',
+            px: { xs: 2, sm: 4, md: 0 },
           }}
         >
           Torque Flow
         </Typography>
       </motion.div>
-      {/* Tiles Grid */}
       <Grid
         container
         spacing={4}
@@ -75,17 +75,54 @@ export default function Home() {
                 elevation={24}
                 onClick={() => navigate(tile.path)}
                 sx={{
+                  'position': 'relative',
                   'width': { xs: 150, sm: 200, md: 250 },
                   'height': { xs: 150, sm: 200, md: 250 },
                   'display': 'flex',
                   'justifyContent': 'center',
                   'alignItems': 'center',
                   'cursor': 'pointer',
-                  'bgcolor': '#111111e7',
+                  'bgcolor': '#000000e7',
                   'color': '#e0e0e0',
-                  'transition': 'background-color 0.3s ease',
+                  'transition': 'all 0.5s ease',
+                  'borderRadius': '16px',
+                  'overflow': 'hidden',
+
                   '&:hover': {
-                    bgcolor: '#2b2b2b',
+                    background:
+                      'linear-gradient(270deg, #01263a, #01354d, #024862, #03566f, #01263a)',
+                    backgroundSize: '400% 400%',
+                    animation: 'smoothFlow 15s linear infinite',
+                    color: '#fff',
+                  },
+
+                  '&::before': {
+                    content: '""',
+                    position: 'absolute',
+                    inset: 0,
+                    borderRadius: '16px',
+                    padding: '3px',
+                    background:
+                      'linear-gradient(270deg, #01263a, #01354d, #024862, #03566f, #01263a)',
+                    backgroundSize: '400% 400%',
+                    backgroundPosition: '0% 50%',
+                    WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+                    WebkitMaskComposite: 'xor',
+                    maskComposite: 'exclude',
+                    animation: 'smoothFlow 15s linear infinite',
+                    transition: 'opacity 0.4s ease',
+                    zIndex: 1,
+                  },
+
+                  '@keyframes smoothFlow': {
+                    '0%': { backgroundPosition: '0% 50%' },
+                    '50%': { backgroundPosition: '100% 50%' },
+                    '100%': { backgroundPosition: '0% 50%' },
+                  },
+
+                  '& > *': {
+                    position: 'relative',
+                    zIndex: 2,
                   },
                 }}
               >
