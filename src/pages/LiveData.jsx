@@ -1,4 +1,4 @@
-import { Box, Typography, Grid, Button, ButtonGroup, Stack } from '@mui/material';
+import { Box, Typography, Grid, Button, ButtonGroup, Stack, Container } from '@mui/material';
 import { Link } from 'react-router-dom';
 import GaugeComponent from 'react-gauge-component';
 import { motion } from 'framer-motion';
@@ -80,49 +80,44 @@ export default function LiveData({ data }) {
   return (
     <Box
       sx={{
-        position: 'relative',
-        minHeight: '100vh',
-        overflow: 'hidden',
         display: 'flex',
-        flexDirection: 'row',
-        alignItems: 'center',
-        bgcolor: 'default.background',
-        px: 2,
-        pt: 2,
+        justifyContent: 'center',
+        height: '100vh',
+        overflow: 'auto',
       }}
     >
       <Box
         sx={{
           position: 'absolute',
-          top: 36,
-          left: 36,
-          zIndex: 1000,
+          top: { xs: 20, sm: 36 },
+          left: { xs: 20, sm: 36 },
+          bgcolor: 'background.default',
         }}
       >
         <Link to='/' style={{ textDecoration: 'none' }}>
           <Button
             variant='outlined'
             sx={{
-              'borderColor': '#84cc16',
+              'boxShadow': '0 0 8px 1px rgba(0, 183, 255, 0.39)',
               'color': 'white',
-              'borderRadius': 1,
-              'px': 2,
-              'py': 1.2,
-              'textTransform': 'none',
+              'borderRadius': { xs: 0.8, sm: 1 },
+              'px': { xs: 0, sm: 2 },
+              'py': { xs: 0.8, sm: 1.2 },
               'backgroundColor': 'transparent',
-              'transition': 'background-color 0.3s ease',
+              'transition': 'background-color 0.7s ease',
               '&:hover, &:active': {
-                backgroundColor: '#abf044ff',
+                backgroundColor: '#056fb6cc',
+                border: 'none',
               },
             }}
           >
             <Stack direction='row' spacing={1.5} alignItems='center'>
               <Box
                 sx={{
-                  width: 24,
-                  height: 24,
+                  width: { xs: '16', sm: '24' },
+                  height: { xs: '16', sm: '24' },
                   borderRadius: '50%',
-                  border: '1px solid white',
+                  border: '1.5px solid ',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
@@ -130,35 +125,27 @@ export default function LiveData({ data }) {
               >
                 <ArrowBackIcon sx={{ width: 14, height: 14, color: 'white' }} />
               </Box>
-
               <Typography
                 sx={{
-                  display: { xs: 'none', sm: 'block' },
-                  fontFamily: 'var(--caption-heavy-font-family)',
-                  fontWeight: 'var(--caption-heavy-font-weight)',
-                  fontSize: 'var(--caption-heavy-font-size)',
-                  letterSpacing: 'var(--caption-heavy-letter-spacing)',
-                  lineHeight: 'var(--caption-heavy-line-height)',
-                  fontStyle: 'var(--caption-heavy-font-style)',
+                  display: { xs: 'none', md: 'block' },
                   whiteSpace: 'nowrap',
                 }}
               >
-                Menu
+                MENU
               </Typography>
             </Stack>
           </Button>
         </Link>
       </Box>
 
+      {/* Main Scrollable Content */}
       <Box
         sx={{
-          px: 2,
-          pt: 2,
-          pb: 3,
+          ml: { xs: 4, sm: 8, md: 10 },
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          bgcolor: 'default.background',
+          bgcolor: 'background.default',
         }}
       >
         <motion.div
@@ -178,6 +165,8 @@ export default function LiveData({ data }) {
             sx={{
               fontWeight: 700,
               mb: { xs: 2, sm: 4, md: 6 },
+              mt: { xs: 8 },
+              ml: { sm: '0px', md: '-90px' },
               background: 'linear-gradient(90deg, #00e5ff, #2979ff, #00bcd4, #00e5ff)',
               backgroundSize: '200% 100%',
               backgroundPositionX: '0%',
@@ -186,64 +175,75 @@ export default function LiveData({ data }) {
               letterSpacing: '2px',
               fontFamily: "'Orbitron', sans-serif",
               textAlign: 'center',
-              px: { xs: 2, sm: 4, md: 0 },
-              fontSize: { xs: '2rem', sm: '2rem', md: '4rem' },
+              px: { xs: 2, sm: 4 },
+              fontSize: { xs: '2rem', sm: '2.5rem', md: '4rem' },
             }}
           >
             Telemetry Dashboard
           </Typography>
         </motion.div>
+
         <Box
           sx={{
             display: 'flex',
-            flexDirection: { xs: 'column', md: 'row' },
+            flexDirection: () => (isSmallScreen ? 'column' : 'row'),
             alignItems: 'center',
             px: 3,
-            bgcolor: 'default.background',
+            py: 3,
+            bgcolor: 'background.default',
           }}
         >
-          <Box
+          <Grid
+            container
+            spacing={{ xs: 2, sm: 6, md: 4 }}
+            justifyContent='center'
             sx={{
-              bgcolor: 'default.background',
+              width: '100%',
+              maxWidth: 1200,
+              bgcolor: 'background.default',
               color: 'text.primary',
               py: { xs: 2, sm: 4, md: 4 },
-              px: { xs: 5, sm: 2, md: 4 },
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
+              px: { xs: 1, sm: 2, md: 4 },
             }}
           >
-            <Grid
-              container
-              spacing={{ xs: 1, sm: 2, md: 3 }}
-              justifyContent='flex-end'
-              sx={{ width: '100%', maxWidth: 1200, justifyContent: 'center' }}
-            >
-              {gauges.map((g, index) => (
-                <Grid item key={index} xs={6} sm={6} md={3}>
+            {gauges.map((g, index) => (
+              <Grid item key={index} xs={6} sm={4} md={8}>
+                <Box
+                  sx={{
+                    bgcolor: 'background.paper',
+                    border: 'rgba(17, 83, 121, 1) 2px solid',
+                    borderRadius: 2,
+                    p: { xs: 1, sm: 2, md: 2 },
+                    boxShadow: '0 0 8px 2px rgba(0, 183, 255, 0.39)',
+                    textAlign: 'center',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    width: '100%',
+                  }}
+                >
+                  <Typography
+                    sx={{ fontSize: { xs: '0.7rem', sm: '0.9rem', md: '1rem' } }}
+                    gutterBottom
+                  >
+                    {g.label}
+                  </Typography>
                   <Box
                     sx={{
-                      bgcolor: 'background.paper',
-                      borderRadius: 2,
-                      p: { xs: 1, sm: 2, md: 2 },
-                      boxShadow: 24,
-                      textAlign: 'center',
-                      width: '100%',
+                      backgroundColor: 'background.paper',
+                      width: { xs: 110, sm: 150, md: 190 },
+                      aspectRatio: '1.618 / 1',
                       display: 'flex',
-                      flexDirection: 'column',
                       alignItems: 'center',
+                      justifyContent: 'center',
+                      color: 'white',
+                      fontWeight: 'bold',
                     }}
                   >
-                    <Typography
-                      sx={{ fontSize: { xs: '0.7rem', sm: '0.9rem', md: '1rem' } }}
-                      gutterBottom
-                    >
-                      {g.label}
-                    </Typography>
                     <Box
                       sx={{
-                        width: { xs: 120, sm: 150, md: 200 },
-                        transform: { xs: 'scale(0.8)', sm: 'scale(1)', md: 'scale(1)' },
+                        width: '90%',
+                        height: '90%',
                       }}
                     >
                       <GaugeComponent
@@ -269,19 +269,22 @@ export default function LiveData({ data }) {
                       />
                     </Box>
                   </Box>
-                </Grid>
-              ))}
-            </Grid>
-          </Box>
+                </Box>
+              </Grid>
+            ))}
+          </Grid>
           <ButtonGroup
             variant='contained'
             disableElevation
-            size='large'
+            size={isSmallScreen ? 'small' : 'large'}
             orientation={isSmallScreen ? 'horizontal' : 'vertical'}
             aria-label='Engine Modes'
             sx={{
+              'flexWrap': 'wrap',
+              'ml': { md: -3 },
               '& .MuiButtonGroup-grouped': {
                 borderColor: 'transparent',
+                flex: '1 1 auto',
               },
             }}
           >
