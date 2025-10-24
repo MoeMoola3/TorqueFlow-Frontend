@@ -6,9 +6,9 @@ export default function Home() {
   const navigate = useNavigate();
 
   const tiles = [
+    { title: 'Info', path: '/info' },
     { title: 'Live Data', path: '/live-data' },
-    { title: 'Diagnostics', path: '/page2' },
-    { title: 'Reports', path: '/page3' },
+    { title: 'Data Log', path: '/page3' },
     { title: 'Settings', path: '/page4' },
   ];
 

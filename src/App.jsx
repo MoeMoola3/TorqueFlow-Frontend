@@ -3,6 +3,7 @@ import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import { ThemeProvider, createTheme, CssBaseline, Box } from '@mui/material';
 import Home from './pages/Home';
 import LiveData from './pages/LiveData';
+import Info from './pages/Info';
 
 const darkTheme = createTheme({
   palette: {
@@ -82,6 +83,7 @@ const App = () => {
           <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/live-data' element={<LiveData data={vehicleData} />} />
+            <Route path='/info' element={<Info />} />
           </Routes>
         </Box>
       </Router>
