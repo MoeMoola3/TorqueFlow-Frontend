@@ -1,15 +1,16 @@
 import { Grid, Paper, Typography, Box } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import LockIcon from '@mui/icons-material/Lock';
 
 export default function Home() {
   const navigate = useNavigate();
 
   const tiles = [
-    { title: 'Info', path: '/info' },
-    { title: 'Live Data', path: '/live-data' },
-    { title: 'Data Log', path: '/page3' },
-    { title: 'Settings', path: '/page4' },
+    { title: 'Info', path: '/info', disabled: false },
+    { title: 'Live Data', path: '/live-data', disabled: false },
+    { title: 'Data Log', path: '/page3', disabled: false },
+    { title: 'Settings', path: '/page4', disabled: true },
   ];
 
   return (
@@ -20,12 +21,12 @@ export default function Home() {
         display: 'flex',
         flexDirection: 'column',
         bgcolor: 'background.default',
+        minHeight: '100vh',
       }}
     >
+      {/* Title */}
       <motion.div
-        animate={{
-          backgroundPositionX: ['0%', '200%'],
-        }}
+        animate={{ backgroundPositionX: ['0%', '200%'] }}
         transition={{
           backgroundPositionX: {
             duration: 3,
@@ -53,14 +54,13 @@ export default function Home() {
           Torque Flow
         </Typography>
       </motion.div>
+
       <Grid
         container
         spacing={4}
         justifyContent='center'
         alignItems='center'
-        sx={{
-          width: '100%',
-        }}
+        sx={{ width: '100%' }}
       >
         {tiles.map((tile, index) => (
           <Grid item key={tile.title}>
@@ -68,12 +68,12 @@ export default function Home() {
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.15, duration: 0.6 }}
-              whileHover={{ scale: 1.04 }}
-              whileTap={{ scale: 0.97 }}
+              whileHover={!tile.disabled ? { scale: 1.04 } : {}}
+              whileTap={!tile.disabled ? { scale: 0.97 } : {}}
             >
               <Paper
-                elevation={24}
-                onClick={() => navigate(tile.path)}
+                elevation={tile.disabled ? 6 : 24}
+                onClick={() => !tile.disabled && navigate(tile.path)}
                 sx={{
                   'position': 'relative',
                   'width': { xs: 150, sm: 200, md: 250 },
@@ -81,14 +81,18 @@ export default function Home() {
                   'display': 'flex',
                   'justifyContent': 'center',
                   'alignItems': 'center',
-                  'cursor': 'pointer',
-                  'bgcolor': '#000000e7',
-                  'color': '#e0e0e0',
+                  'cursor': tile.disabled ? 'not-allowed' : 'pointer',
+                  'bgcolor': tile.disabled ? '#121212' : '#000000e7',
+                  'color': tile.disabled ? '#666' : '#e0e0e0',
                   'transition': 'all 0.5s ease',
                   'borderRadius': '16px',
                   'overflow': 'hidden',
+                  'pointerEvents': tile.disabled ? 'none' : 'auto',
+                  'boxShadow': tile.disabled
+                    ? '0 0 15px rgba(0, 150, 255, 0.05)'
+                    : '0 0 25px rgba(0,0,0,0.5)',
 
-                  '&:hover': {
+                  '&:hover': !tile.disabled && {
                     background:
                       'linear-gradient(270deg, #01263a, #01354d, #024862, #03566f, #01263a)',
                     backgroundSize: '400% 400%',
@@ -96,7 +100,7 @@ export default function Home() {
                     color: '#fff',
                   },
 
-                  '&::before': {
+                  '&::before': !tile.disabled && {
                     content: '""',
                     position: 'absolute',
                     inset: 0,
@@ -110,9 +114,17 @@ export default function Home() {
                     WebkitMaskComposite: 'xor',
                     maskComposite: 'exclude',
                     animation: 'smoothFlow 15s linear infinite',
-                    transition: 'opacity 0.4s ease',
                     zIndex: 1,
                   },
+
+                  ...(tile.disabled && {
+                    'animation': 'pulseGlow 3s ease-in-out infinite',
+                    '@keyframes pulseGlow': {
+                      '0%': { boxShadow: '0 0 15px rgba(0,150,255,0.08)' },
+                      '50%': { boxShadow: '0 0 25px rgba(0,150,255,0.2)' },
+                      '100%': { boxShadow: '0 0 15px rgba(0,150,255,0.08)' },
+                    },
+                  }),
 
                   '@keyframes smoothFlow': {
                     '0%': { backgroundPosition: '0% 50%' },
@@ -120,19 +132,32 @@ export default function Home() {
                     '100%': { backgroundPosition: '0% 50%' },
                   },
 
-                  '& > *': {
-                    position: 'relative',
-                    zIndex: 2,
-                  },
+                  '& > *': { position: 'relative', zIndex: 2 },
                 }}
               >
                 <Typography
                   variant='h5'
                   fontWeight={600}
-                  sx={{ fontSize: { xs: '1rem', sm: '1.2rem', md: '1.5rem' } }}
+                  sx={{
+                    fontSize: { xs: '1rem', sm: '1.2rem', md: '1.5rem' },
+                    opacity: tile.disabled ? 0.6 : 1,
+                  }}
                 >
                   {tile.title}
                 </Typography>
+
+                {tile.disabled && (
+                  <LockIcon
+                    sx={{
+                      position: 'absolute',
+                      bottom: 12,
+                      right: 12,
+                      fontSize: 24,
+                      color: '#0288d1',
+                      opacity: 0.7,
+                    }}
+                  />
+                )}
               </Paper>
             </motion.div>
           </Grid>
