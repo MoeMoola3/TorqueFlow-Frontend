@@ -9,8 +9,8 @@ export default function Home() {
   const tiles = [
     { title: 'Info', path: '/info', disabled: false },
     { title: 'Live Data', path: '/live-data', disabled: false },
-    { title: 'Data Log', path: '/page3', disabled: false },
-    { title: 'Settings', path: '/page4', disabled: true },
+    { title: 'Data Log', path: '/data-log', disabled: false },
+    { title: 'Settings', path: '#', disabled: true },
   ];
 
   return (
@@ -24,7 +24,6 @@ export default function Home() {
         minHeight: '100vh',
       }}
     >
-      {/* Title */}
       <motion.div
         animate={{ backgroundPositionX: ['0%', '200%'] }}
         transition={{

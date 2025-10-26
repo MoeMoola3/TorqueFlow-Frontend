@@ -1,39 +1,3 @@
-// import { Box, Typography } from '@mui/material';
-// import Title from '../components/Title';
-// import BackButton from '../components/BackButton';
-
-// const Info = () => {
-//   const [infoText, setInfoText] = useState('');
-
-//   useEffect(() => {
-//     fetch('/assets/info.txt')
-//       .then((res) => res.text())
-//       .then((text) => setInfoText(text))
-//       .catch((err) => console.error('Error loading text file:', err));
-//   }, []);
-
-//   return (
-//     <Box
-//       sx={{
-//         display: 'flex',
-//         height: '100vh',
-//         overflow: 'auto',
-//         flexDirection: 'column',
-//       }}
-//     >
-//       <BackButton text='MENU' path='/' />
-//       <Title text='INFO' />
-//       <Box>
-//         <Typography variant='body2' sx={{ whiteSpace: 'pre-line' }}>
-//           {infoText}
-//         </Typography>
-//       </Box>
-//     </Box>
-//   );
-// };
-
-// export default Info;
-
 import { Box, Typography, useTheme, useMediaQuery } from '@mui/material';
 import { useEffect, useState } from 'react';
 import Title from '../components/Title';

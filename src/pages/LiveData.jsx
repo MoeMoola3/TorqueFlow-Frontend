@@ -24,7 +24,7 @@ export default function LiveData({ data }) {
 
       <Box
         sx={{
-          ml: { xs: 4, sm: 8, md: 10 },
+          ml: { xs: 0, sm: 8, md: 10 },
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
@@ -37,7 +37,7 @@ export default function LiveData({ data }) {
             display: 'flex',
             flexDirection: () => (isSmallScreen ? 'column' : 'row'),
             alignItems: 'center',
-            px: 3,
+            px: { sm: 3 },
             py: 3,
             bgcolor: 'background.default',
           }}

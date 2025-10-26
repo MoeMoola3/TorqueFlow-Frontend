@@ -1,4 +1,3 @@
-This On-Board Diagnostics (OBD) simulation tool provides a live visual interface for monitoring key vehicle performance metrics such as engine RPM, coolant temperature, throttle position, and more. The data displayed in this dashboard is fully simulated, designed to replicate real-world sensor behavior for testing and demonstration purposes. It allows users to explore how diagnostic systems 
-interpret and present vehicle data without requiring a physical OBD connection. 
+This On-Board Diagnostics (OBD) simulation tool provides a live visual interface for monitoring key vehicle performance metrics such as engine RPM, coolant temperature, throttle position, and more. The data displayed in this dashboard is fully simulated, designed to replicate real-world sensor behavior for testing and demonstration purposes. It allows users to explore how diagnostic systems interpret and present vehicle data without requiring a physical OBD connection. 
 
 This makes it ideal for showcasing analytics dashboards, experimenting with interface designs, and understanding how modern vehicles communicate through diagnostic protocols.

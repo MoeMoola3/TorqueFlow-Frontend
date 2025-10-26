@@ -4,6 +4,7 @@ import { ThemeProvider, createTheme, CssBaseline, Box } from '@mui/material';
 import Home from './pages/Home';
 import LiveData from './pages/LiveData';
 import Info from './pages/Info';
+import DataLog from './pages/DataLog';
 
 const darkTheme = createTheme({
   palette: {
@@ -84,6 +85,7 @@ const App = () => {
             <Route path='/' element={<Home />} />
             <Route path='/live-data' element={<LiveData data={vehicleData} />} />
             <Route path='/info' element={<Info />} />
+            <Route path='/data-log' element={<DataLog />} />
           </Routes>
         </Box>
       </Router>

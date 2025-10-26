@@ -1,5 +1,4 @@
 import { Box, Grid, Typography } from '@mui/material';
-import React from 'react';
 import GaugeComponent from 'react-gauge-component';
 
 const GaugesGrid = (props) => {
@@ -27,7 +26,7 @@ const GaugesGrid = (props) => {
   return (
     <Grid
       container
-      spacing={{ xs: 2, sm: 6, md: 4 }}
+      spacing={{ xs: 4, sm: 6, md: 4 }}
       justifyContent='center'
       sx={{
         width: '100%',
