@@ -22,6 +22,7 @@ const Info = () => {
         display: 'flex',
         flexDirection: 'column',
         minHeight: '100vh',
+        width: '100vw',
         bgcolor: 'background.default',
         color: 'text.primary',
         px: { xs: 2, sm: 4, md: 8 },

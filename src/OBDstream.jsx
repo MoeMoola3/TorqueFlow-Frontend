@@ -5,7 +5,7 @@ export default function OBDStream() {
   const wsRef = useRef(null);
 
   useEffect(() => {
-    const backendWs = 'wss://obd-api.moemoola.com/register';
+    const backendWs = 'wss://obd-api.moemoola.com/ws';
     wsRef.current = new WebSocket(backendWs);
 
     wsRef.current.onopen = () => {

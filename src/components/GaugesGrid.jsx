@@ -1,7 +1,11 @@
 import { Box, Grid, Typography } from '@mui/material';
 import GaugeComponent from 'react-gauge-component';
+import { VehicleDataContext } from '../providers/vehicleDataProvider';
+import { useContext } from 'react';
 
-const GaugesGrid = (props) => {
+const GaugesGrid = () => {
+  const vehicleData = useContext(VehicleDataContext);
+
   const {
     engineRpm,
     speed,
@@ -11,7 +15,7 @@ const GaugesGrid = (props) => {
     shortTermFuelTrim,
     engineLoad,
     fuelLevel,
-  } = props.data;
+  } = vehicleData;
 
   const gauges = [
     { label: 'Engine RPM', value: engineRpm, min: 0, max: 8000, units: 'RPM' },

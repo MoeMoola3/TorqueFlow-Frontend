@@ -22,6 +22,7 @@ export default function Home() {
         flexDirection: 'column',
         bgcolor: 'background.default',
         minHeight: '100vh',
+        width: '100vw',
       }}
     >
       <motion.div
