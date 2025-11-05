@@ -1,13 +1,11 @@
-import { Box, Typography } from '@mui/material';
+import { Box } from '@mui/material';
 import { useMediaQuery, useTheme } from '@mui/material';
 import BackButton from '../components/BackButton';
 import Title from '../components/Title';
 import GaugesGrid from '../components/GaugesGrid';
 import EngineModeButtons from '../components/EngineModeButtons';
 
-export default function LiveData({ data }) {
-  if (!data) return <Typography>Loading...</Typography>;
-
+export default function LiveData() {
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
@@ -17,6 +15,7 @@ export default function LiveData({ data }) {
         display: 'flex',
         justifyContent: 'center',
         height: '100vh',
+        width: '100vw',
         overflow: 'auto',
       }}
     >
@@ -24,7 +23,7 @@ export default function LiveData({ data }) {
 
       <Box
         sx={{
-          ml: { xs: 4, sm: 8, md: 10 },
+          ml: { xs: 0, sm: 8, md: 10 },
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
@@ -37,12 +36,12 @@ export default function LiveData({ data }) {
             display: 'flex',
             flexDirection: () => (isSmallScreen ? 'column' : 'row'),
             alignItems: 'center',
-            px: 3,
+            px: { sm: 3 },
             py: 3,
             bgcolor: 'background.default',
           }}
         >
-          <GaugesGrid data={data} />
+          <GaugesGrid />
           <EngineModeButtons isSmallScreen={isSmallScreen} />
         </Box>
       </Box>

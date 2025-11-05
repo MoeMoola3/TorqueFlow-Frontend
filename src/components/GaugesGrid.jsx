@@ -1,8 +1,11 @@
 import { Box, Grid, Typography } from '@mui/material';
-import React from 'react';
 import GaugeComponent from 'react-gauge-component';
+import { VehicleDataContext } from '../providers/vehicleDataProvider';
+import { useContext } from 'react';
 
-const GaugesGrid = (props) => {
+const GaugesGrid = () => {
+  const { vehicleData } = useContext(VehicleDataContext);
+
   const {
     engineRpm,
     speed,
@@ -12,7 +15,7 @@ const GaugesGrid = (props) => {
     shortTermFuelTrim,
     engineLoad,
     fuelLevel,
-  } = props.data;
+  } = vehicleData;
 
   const gauges = [
     { label: 'Engine RPM', value: engineRpm, min: 0, max: 8000, units: 'RPM' },
@@ -45,7 +48,7 @@ const GaugesGrid = (props) => {
               bgcolor: 'background.paper',
               border: 'rgba(17, 83, 121, 1) 2px solid',
               borderRadius: 2,
-              p: { xs: 1, sm: 2, md: 2 },
+              p: { xs: 2, sm: 2, md: 2 },
               boxShadow: '0 0 8px 2px rgba(0, 183, 255, 0.39)',
               textAlign: 'center',
               display: 'flex',
@@ -60,7 +63,7 @@ const GaugesGrid = (props) => {
             <Box
               sx={{
                 backgroundColor: 'background.paper',
-                width: { xs: 110, sm: 150, md: 190 },
+                width: { xs: 140, sm: 150, md: 190 },
                 aspectRatio: '1.618 / 1',
                 display: 'flex',
                 alignItems: 'center',
@@ -71,8 +74,8 @@ const GaugesGrid = (props) => {
             >
               <Box
                 sx={{
-                  width: '90%',
-                  height: '90%',
+                  width: '100%',
+                  height: '100%',
                 }}
               >
                 <GaugeComponent
