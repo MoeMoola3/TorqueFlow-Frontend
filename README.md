@@ -83,7 +83,7 @@ A simple, readable section describing the purpose of TorqueFlow:
 | **UI Library** | [Material UI (MUI)](https://mui.com/) |
 | **Animations** | [Framer Motion](https://www.framer.com/motion/) |
 | **Data Visualization** | [react-gauge-component](https://www.npmjs.com/package/react-gauge-component) |
-| **Backend API** | [Spring Boot Backend Repo →]([https://github.com/your-username/torqueflow-backend](https://github.com/MoeMoola3/TorqueFlow)) |
+| **Backend API** | [Spring Boot Backend Repo →](https://github.com/MoeMoola3/TorqueFlow) |
 | **Database** | MySQL |
 | **CI/CD** | GitHub Actions |
 | **Deployment** | GitHub Pages |
