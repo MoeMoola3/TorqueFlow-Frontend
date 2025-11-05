@@ -29,18 +29,16 @@ A *virtual engine control dashboard* built for developers, car enthusiasts, and 
 
 ## 🌐 Live Demo
 
-> 🔗 **Coming Soon** (auto-deployed via GitHub Pages on each main branch push)
+https://github.com/user-attachments/assets/36e68c7a-8f49-4cd8-b01a-e02d1b247973
 
 ---
 
 ## 📸 Preview
 
 <p align="center">
-  <img src="https://github.com/your-username/torqueflow-frontend/assets/dashboard.gif" alt="Live Data Dashboard" width="90%" />
-</p>
-
-<p align="center">
-  <b>▲ Live Data Gauges reacting to simulated engine modes</b>
+<img width="1911" height="945" alt="Screenshot 2025-11-05 014536" src="https://github.com/user-attachments/assets/169d7e94-f00b-4a00-b156-0653e22fa0a6" width="90%" />
+<img width="1906" height="907" alt="Screenshot 2025-11-05 014618" src="https://github.com/user-attachments/assets/5a14762e-f568-41f5-b898-fbf72ba611b0" width="90%" />
+<img width="1903" height="946" alt="Screenshot 2025-11-05 014507" src="https://github.com/user-attachments/assets/2f49beee-cd3d-4147-bad7-2d34069a9ad9" width="90%" />
 </p>
 
 ---
@@ -63,7 +61,7 @@ Each **engine mode** changes how the gauges react, creating a realistic simulati
 ---
 
 ### 📊 **2. Data Log Table**
-A clean and responsive log viewer that:
+A clean and responsive data table log viewer that:
 - Displays all recorded metrics over time
 - Fetches from the **Spring Boot + MySQL** backend
 - Supports smooth scrolling and structured data display
@@ -73,10 +71,7 @@ Ideal for reviewing trends or diagnosing simulation behavior.
 ---
 
 ### 🧾 **3. Info Page**
-A simple, readable section describing:
-- The purpose of TorqueFlow
-- How data flows through the system
-- What each engine metric represents
+A simple, readable section describing the purpose of TorqueFlow:
 
 ---
 
@@ -88,7 +83,7 @@ A simple, readable section describing:
 | **UI Library** | [Material UI (MUI)](https://mui.com/) |
 | **Animations** | [Framer Motion](https://www.framer.com/motion/) |
 | **Data Visualization** | [react-gauge-component](https://www.npmjs.com/package/react-gauge-component) |
-| **Backend API** | [Spring Boot Backend Repo →](https://github.com/your-username/torqueflow-backend) |
+| **Backend API** | [Spring Boot Backend Repo →]([https://github.com/your-username/torqueflow-backend](https://github.com/MoeMoola3/TorqueFlow)) |
 | **Database** | MySQL |
 | **CI/CD** | GitHub Actions |
 | **Deployment** | GitHub Pages |
