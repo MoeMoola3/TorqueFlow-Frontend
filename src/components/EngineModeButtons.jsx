@@ -1,35 +1,38 @@
 import { Button, ButtonGroup } from '@mui/material';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { VehicleDataContext } from '../providers/vehicleDataProvider';
 
 const EngineModeButtons = (props) => {
+  const { wsRef } = useContext(VehicleDataContext);
+
   const buttons = [
     {
-      key: 'cold',
+      key: 'COLD_START',
       label: 'COLD START',
       color: '#0288d1',
     },
     {
-      key: 'idle',
+      key: 'IDLE',
       label: 'IDLE',
       color: '#4caf50',
     },
     {
-      key: 'acc',
+      key: 'ACCELERATION',
       label: 'ACCELERATION',
       color: '#f44336',
     },
     {
-      key: 'cruise',
+      key: 'CRUISE',
       label: 'CRUISE',
       color: '#ff9800',
     },
     {
-      key: 'dec',
+      key: 'DECELERATION',
       label: 'DECELERATION',
       color: '#9c27b0',
     },
     {
-      key: 'heavy',
+      key: 'HIGH_LOAD',
       label: 'HEAVY LOAD',
       color: '#795548',
     },
@@ -38,7 +41,20 @@ const EngineModeButtons = (props) => {
 
   const handleSelect = (key) => {
     setSelectedButton(key);
+
+    const ws = wsRef.current;
+    if (ws && ws.readyState === WebSocket.OPEN) {
+      ws.send(
+        JSON.stringify({
+          type: 'modeChange',
+          payload: key,
+        })
+      );
+    } else {
+      console.warn('WebSocket is not open');
+    }
   };
+
   return (
     <ButtonGroup
       variant='contained'

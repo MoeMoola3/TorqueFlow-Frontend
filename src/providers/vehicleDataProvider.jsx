@@ -1,11 +1,13 @@
-import { createContext, useState, useEffect } from 'react';
+import { createContext, useState, useEffect, useRef } from 'react';
 
-export const VehicleDataContext = createContext();
+export const VehicleDataContext = createContext({
+  vehicleData: {},
+  wsRef: null,
+});
 
 const vary = (value, min, max) => {
   const delta = (Math.random() - 0.5) * 0.5;
-  const newValue = value + delta;
-  return Math.min(max, Math.max(min, newValue));
+  return Math.min(max, Math.max(min, value + delta));
 };
 
 export const VehicleDataProvider = ({ children }) => {
@@ -23,7 +25,15 @@ export const VehicleDataProvider = ({ children }) => {
     vin: { vin: '1HGCM82633A004352' },
   });
 
+  const wsRef = useRef(null);
+  const timeoutRef = useRef(null);
+
+  const USE_MOCK = import.meta.env.VITE_USE_MOCK === 'true';
+
+  //MOCK MODE
   useEffect(() => {
+    if (!USE_MOCK) return;
+    console.log('Using Mock Data');
     const interval = setInterval(() => {
       const now = new Date();
       setVehicleData((prev) => ({
@@ -49,7 +59,40 @@ export const VehicleDataProvider = ({ children }) => {
     }, 1000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [USE_MOCK]);
 
-  return <VehicleDataContext.Provider value={vehicleData}>{children}</VehicleDataContext.Provider>;
+  // REAL WS MODE
+  useEffect(() => {
+    if (USE_MOCK) return;
+
+    const ws = new WebSocket('wss://obd-api.moemoola.com/ws');
+    wsRef.current = ws;
+
+    ws.onmessage = (event) => {
+      try {
+        const data = JSON.parse(event.data);
+        setVehicleData(data);
+      } catch (e) {
+        console.warn('Invalid WebSocket data', e);
+      }
+    };
+
+    ws.onopen = () => {
+      timeoutRef.current = setTimeout(() => {
+        if (ws.readyState === WebSocket.OPEN) ws.close();
+      }, 180000);
+    };
+
+    return () => {
+      ws.close();
+      clearTimeout(timeoutRef.current);
+      wsRef.current = null;
+    };
+  }, [USE_MOCK]);
+
+  return (
+    <VehicleDataContext.Provider value={{ vehicleData, wsRef }}>
+      {children}
+    </VehicleDataContext.Provider>
+  );
 };

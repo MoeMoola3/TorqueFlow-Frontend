@@ -4,7 +4,7 @@ import { VehicleDataContext } from '../providers/vehicleDataProvider';
 import { useContext } from 'react';
 
 const GaugesGrid = () => {
-  const vehicleData = useContext(VehicleDataContext);
+  const { vehicleData } = useContext(VehicleDataContext);
 
   const {
     engineRpm,
@@ -30,7 +30,7 @@ const GaugesGrid = () => {
   return (
     <Grid
       container
-      spacing={{ xs: 4, sm: 6, md: 4 }}
+      spacing={{ xs: 2, sm: 6, md: 4 }}
       justifyContent='center'
       sx={{
         width: '100%',
@@ -48,7 +48,7 @@ const GaugesGrid = () => {
               bgcolor: 'background.paper',
               border: 'rgba(17, 83, 121, 1) 2px solid',
               borderRadius: 2,
-              p: { xs: 1, sm: 2, md: 2 },
+              p: { xs: 2, sm: 2, md: 2 },
               boxShadow: '0 0 8px 2px rgba(0, 183, 255, 0.39)',
               textAlign: 'center',
               display: 'flex',
@@ -63,7 +63,7 @@ const GaugesGrid = () => {
             <Box
               sx={{
                 backgroundColor: 'background.paper',
-                width: { xs: 110, sm: 150, md: 190 },
+                width: { xs: 140, sm: 150, md: 190 },
                 aspectRatio: '1.618 / 1',
                 display: 'flex',
                 alignItems: 'center',
@@ -74,8 +74,8 @@ const GaugesGrid = () => {
             >
               <Box
                 sx={{
-                  width: '90%',
-                  height: '90%',
+                  width: '100%',
+                  height: '100%',
                 }}
               >
                 <GaugeComponent
