@@ -18,22 +18,23 @@
 
 ---
 
-## 🧭 Overview
+## 🔎 Overview
 
-**TorqueFlow** is a modern, visually dynamic frontend built with **React.js**, designed to simulate and display **real-time automotive data**.  
+**TorqueFlow** is a modern, visually dynamic frontend built with **React.js**, designed to simulate and display **real-time automotive data**.
+
 It connects to a **Spring Boot backend** (via REST/WebSocket) to visualize live metrics like engine RPM, fuel level, O₂ sensor readings, and more — all rendered through responsive gauges and dashboards.
 
 A *virtual engine control dashboard* built for developers, car enthusiasts, and data geeks.
 
 ---
 
-## 📡 Live Site
+## 🌐 Live Site
 
 Check the live application here: [TorqueFlow](https://torqueflow.moemoola.com/)
 
 ---
 
-## 🌐 Demo
+## 📽 Demo
 
 https://github.com/user-attachments/assets/36e68c7a-8f49-4cd8-b01a-e02d1b247973
 
