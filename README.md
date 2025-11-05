@@ -34,22 +34,6 @@ Check the live application here: [TorqueFlow](https://torqueflow.moemoola.com/)
 
 ---
 
-## 📽 Demo
-
-https://github.com/user-attachments/assets/36e68c7a-8f49-4cd8-b01a-e02d1b247973
-
----
-
-## 📸 Preview
-
-<p align="center">
-<img width="1911" height="945" alt="Screenshot 2025-11-05 014536" src="https://github.com/user-attachments/assets/169d7e94-f00b-4a00-b156-0653e22fa0a6" width="90%" />
-<img width="1906" height="907" alt="Screenshot 2025-11-05 014618" src="https://github.com/user-attachments/assets/5a14762e-f568-41f5-b898-fbf72ba611b0" width="90%" />
-<img width="1903" height="946" alt="Screenshot 2025-11-05 014507" src="https://github.com/user-attachments/assets/2f49beee-cd3d-4147-bad7-2d34069a9ad9" width="90%" />
-</p>
-
----
-
 ## 🚀 Core Features
 
 ### 🔴 **1. Live Data Dashboard**
@@ -65,7 +49,6 @@ A real-time, animated view of the engine’s simulated telemetry:
 
 Each **engine mode** changes how the gauges react, creating a realistic simulation effect — perfect for visualization demos or testing telemetry UIs.
 
----
 
 ### 📊 **2. Data Log Table**
 A clean and responsive data table log viewer that:
@@ -77,8 +60,19 @@ Ideal for reviewing trends or diagnosing simulation behavior.
 
 ---
 
-### 🧾 **3. Info Page**
-A simple, readable section describing the purpose of TorqueFlow:
+## 📽 Demo
+
+https://github.com/user-attachments/assets/36e68c7a-8f49-4cd8-b01a-e02d1b247973
+
+---
+
+## 📸 Preview
+
+<p align="center">
+<img width="1911" height="945" alt="Screenshot 2025-11-05 014536" src="https://github.com/user-attachments/assets/169d7e94-f00b-4a00-b156-0653e22fa0a6" width="90%" />
+<img width="1906" height="907" alt="Screenshot 2025-11-05 014618" src="https://github.com/user-attachments/assets/5a14762e-f568-41f5-b898-fbf72ba611b0" width="90%" />
+<img width="1903" height="946" alt="Screenshot 2025-11-05 014507" src="https://github.com/user-attachments/assets/2f49beee-cd3d-4147-bad7-2d34069a9ad9" width="90%" />
+</p>
 
 ---
 
